@@ -1,13 +1,13 @@
 package database;
 
-import models.User;
+import models.Users;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
 public class UserDB {
 
-    public void insert(User user) throws NotesDBException {
+    public void insert(Users user) throws NotesDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
 
@@ -23,7 +23,7 @@ public class UserDB {
         }
     }
 
-    public void update(User user) throws NotesDBException {
+    public void update(Users user) throws NotesDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
 
@@ -38,11 +38,11 @@ public class UserDB {
         }
     }
 
-    public List<User> getAll() throws NotesDBException {
+    public List<Users> getAll() throws NotesDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
 
         try {
-            List<User> users = em.createNamedQuery("User.findAll", User.class).getResultList();
+            List<Users> users = em.createNamedQuery("User.findAll", Users.class).getResultList();
             return users;
         } finally {
             em.close();
@@ -56,18 +56,18 @@ public class UserDB {
      * @return A User object if found, null otherwise.
      * @throws NotesDBException
      */
-    public User getUser(String username) throws NotesDBException {
+    public Users getUser(String username) throws NotesDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
 
         try {
-            User user = em.find(User.class, username);
+            Users user = em.find(Users.class, username);
             return user;
         } finally {
             em.close();
         }
     }
 
-    public void delete(User user) throws NotesDBException {
+    public void delete(Users user) throws NotesDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
 
